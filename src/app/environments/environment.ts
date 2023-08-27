@@ -1,6 +1,6 @@
 export const environment = {
   reCaptchaSiteSecret: '6LelopAnAAAAABRUejRbijfonTnzWO-cv_1JBPf1',
-  apiUrl: 'https://frost-tasks-api.vercel.app/',
+  apiUrl: 'https://frost-tasks-api.vercel.app',
   jtw_key:
     '-----BEGIN PUBLIC KEY-----\n' +
     'MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA1O9qYNhgwNAgtOFl0vF0\n' +
