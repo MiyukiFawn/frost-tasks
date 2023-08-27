@@ -22,7 +22,7 @@ export class TaskService {
         observer.next(this.getTasksFromMem().reverse());
       });
 
-    return this.http.get<Task[]>(environment.apiUrl + 'tasks', {
+    return this.http.get<Task[]>(environment.apiUrl + '/tasks', {
       headers: {
         Authorization: `Bearer ${localStorage.getItem('login-token')}`,
       },
@@ -47,7 +47,7 @@ export class TaskService {
         observer.next(createdTask);
       });
 
-    return this.http.post<Task>(environment.apiUrl + 'tasks', newTask, {
+    return this.http.post<Task>(environment.apiUrl + '/tasks', newTask, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem('login-token')}`,
       },
@@ -66,7 +66,7 @@ export class TaskService {
         Observable.next(task);
       });
 
-    return this.http.put<Task>(environment.apiUrl + 'tasks', data, {
+    return this.http.put<Task>(environment.apiUrl + '/tasks', data, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem('login-token')}`,
       },
@@ -98,7 +98,7 @@ export class TaskService {
         observer.next(editedTask);
       });
 
-    return this.http.put<Task>(environment.apiUrl + 'tasks', data, {
+    return this.http.put<Task>(environment.apiUrl + '/tasks', data, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem('login-token')}`,
       },

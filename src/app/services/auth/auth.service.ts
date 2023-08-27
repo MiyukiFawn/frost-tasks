@@ -19,11 +19,11 @@ export class AuthService {
       password: password,
     };
 
-    return this.http.post<LoginResponse>(environment.apiUrl + 'login', data);
+    return this.http.post<LoginResponse>(environment.apiUrl + '/login', data);
   }
 
   signUp(newUser: NewUser) {
-    return this.http.post(environment.apiUrl + 'user', newUser);
+    return this.http.post(environment.apiUrl + '/user', newUser);
   }
 
   logout(): void {
@@ -40,7 +40,7 @@ export class AuthService {
 
   refreshToken() {
     return this.http.post<{ access_token: string; refresh_token: string }>(
-      environment.apiUrl + 'refresh',
+      environment.apiUrl + '/refresh',
       {
         refresh_token: localStorage.getItem('refresh-token'),
       }
@@ -60,7 +60,7 @@ export class AuthService {
     if (confirm_password) data.confirm_password = confirm_password;
 
     return this.http.put<{ access_token: string; refresh_token: string }>(
-      environment.apiUrl + 'user',
+      environment.apiUrl + '/user',
       data,
       {
         headers: {
@@ -90,7 +90,7 @@ export class AuthService {
   }
 
   deleteAccount() {
-    return this.http.delete(environment.apiUrl + 'user', {
+    return this.http.delete(environment.apiUrl + '/user', {
       headers: {
         Authorization: `Bearer ${localStorage.getItem('login-token')}`,
       },
