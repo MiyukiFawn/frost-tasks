@@ -1,0 +1,63 @@
+<app-navbar></app-navbar>
+<div class="container mt-5">
+
+    <h3 *ngIf="!isLoading && tasks.length === 0" class="text-center">You don't have any tasks at the moment</h3>
+    <div *ngIf="isLoading" class="d-flex justify-content-center">
+        <div class="spinner-border" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+
+    <ngx-masonry class="row row-cols-4" [ordered]="true">
+        <div ngxMasonryItem [prepend]="true" class="masonry-item" *ngFor="let task of tasks.reverse()">
+            <app-task [Task]="task" (toggleCheck)="onToggleCheck($event)" (delete)="onDelete($event)" />
+        </div>
+    </ngx-masonry>
+</div>
+
+<button type="button" class="position-fixed me-4 bottom-0 end-0 shadow-sm mb-3 btn btn-primary btn-lg"
+    data-bs-toggle="modal" data-bs-target="#createTaskModal">
+    <fa-icon class="me-2" [icon]="faCheck"></fa-icon>
+    New task
+</button>
+
+<div class="modal fade" id="createTaskModal" tabindex="-1" aria-labelledby="createTaskModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    Create new task
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form [formGroup]="addTaskForm" (ngSubmit)="onSubmitNewTask()">
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="newTaskTitle" class="form-label">Title</label>
+                        <input type="text" name="username" formControlName="title" id="newTaskTitle"
+                            class="form-control is-invalid"
+                            [ngClass]="{'is-invalid' : addTaskForm.controls.title.invalid && addTaskForm.controls.title.touched}">
+                        <div class="invalid-feedback"
+                            *ngIf="addTaskForm.controls.title.invalid && addTaskForm.controls.title.touched">
+                            Prease provide a valid title.
+                        </div>
+                    </div>
+                    <div>
+                        <label for="newTaskDesc" class="form-label">Description (optional)</label>
+                        <textarea name="username" formControlName="description" placeholder="Limit of 250 chars."
+                            id="newTaskDesc" rows="3" maxlength="250" class="form-control"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="closeModalButton" class="btn btn-secondary" data-bs-dismiss="modal"
+                        #closeModalButton (click)="onCancelNewTask()">
+                        Cancel
+                    </button>
+                    <button type="submit" [disabled]="!canSubmit" class="btn btn-primary">
+                        Save
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

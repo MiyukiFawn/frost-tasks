@@ -1,0 +1,48 @@
+<div class="container" style="margin-top: 8%;">
+    <div class="d-flex flex-column justify-content-center align-items-center">
+        <div class="card w-25 shadow">
+            <form [formGroup]="loginForm" (submit)="login()" class="card-body">
+                <h1 class="text-center my-4 font-weight-bold">Login</h1>
+                <div class="input-group">
+                    <span class="input-group-text">
+                        <fa-icon [icon]="faUser"></fa-icon>
+                    </span>
+                    <input type="text" placeholder="Username" formControlName="username" name="username" id="username"
+                        [ngClass]="{'is-invalid' : loginForm.controls.username.invalid && loginForm.controls.username.touched}"
+                        class="form-control">
+                </div>
+                <div class="container d-flex justify-content-center align-items-center invalid-feedback"
+                    *ngIf="loginForm.controls.username.invalid && loginForm.controls.username.touched">
+                    Prease provide a valid username
+                </div>
+
+                <div class="input-group mt-3">
+                    <span class="input-group-text">
+                        <fa-icon [icon]="faLock"></fa-icon>
+                    </span>
+                    <input type="password" formControlName="password" placeholder="Password" name="password"
+                        [ngClass]="{'is-invalid' : loginForm.controls.password.invalid && loginForm.controls.password.touched}"
+                        id="password" class="form-control">
+                </div>
+                <div class="container d-flex justify-content-center align-items-center invalid-feedback"
+                    *ngIf="loginForm.controls.password.invalid && loginForm.controls.password.touched">
+                    Prease provide a valid password
+                </div>
+                <div class="container d-flex justify-content-center align-items-center invalid-feedback"
+                    *ngIf="error.length > 0">{{error}}</div>
+
+                <!-- submit -->
+                <div class="d-grid gap-2 mt-3 mb-3">
+                    <button type="submit" class="btn btn-primary" [disabled]="!canSubmit">Enter</button>
+                    <button type="button" class="btn btn-success" (click)="enterAsGuest()" [disabled]="!canSubmit">Enter
+                        as guest</button>
+                    <a class="btn btn-light" routerLink="/signup">New here? Join now!</a>
+                    <a class="btn btn-info mt-4" [routerLink]="['/docs']">
+                        <fa-icon [icon]="faBook"></fa-icon>
+                        Check out the API documentation
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

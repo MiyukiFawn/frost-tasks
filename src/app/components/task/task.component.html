@@ -1,0 +1,25 @@
+<div class="card shadow-sm mb-2" [ngClass]="{'border-primary' : Task.status.toString() === 'CHECKED'}">
+    <div class="card-body">
+        <h3 class="card-title">
+            <div class="row">
+                <div class="col">
+                    <input type="checkbox" [name]="'taskCheck' + Task.id"
+                        [checked]="(Task.status.toString() === 'CHECKED' || Task.status === 1)"
+                        (change)="onToggleCheck()" [id]="'taskCheck' + Task.id" class="me-2 form-check-input">
+                    <label class="form-check-label" [htmlFor]="'taskCheck' + Task.id"
+                        [ngClass]="{'text-decoration-line-through' : (Task.status.toString() === 'CHECKED' || Task.status === 1)}">
+                        {{ Task.title }}
+                    </label>
+                </div>
+                <div class="col-auto">
+                    <button class="btn btn-danger justify-content-end" (click)="onDelete()">
+                        <fa-icon [icon]="faTrash"></fa-icon>
+                    </button>
+                </div>
+            </div>
+        </h3>
+        <h6 class="card-subtitle mt-2 text-muted"
+            [ngClass]="{'text-decoration-line-through' : (Task.status.toString() === 'CHECKED' || Task.status === 1)}">
+            {{Task.description}}</h6>
+    </div>
+</div>

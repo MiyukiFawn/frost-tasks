@@ -1,0 +1,23 @@
+<nav class="navbar bg-dark border-bottom bg-body-tertiary border-body shadow fixed-top" data-bs-theme="dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" routerLink="/">
+            <img src="assets/icon.png" alt="Logo" height="50">
+            Frost Tasks
+        </a>
+
+        <div class="d-flex">
+            <div class="row">
+                <div class="col mb-0 align-baseline p-0 m-0" style="color: var(--bs-navbar-brand-color);">
+                    <span class="navbar-brand">{{authService.getUsername()}}</span>
+                </div>
+                <div class="col mb-0 h5" *ngIf="!authService.isGuest()">
+                    <a routerLink="/profile" class="btn btn-primary" type="button">Profile</a>
+                </div>
+                <div class="col mb-0">
+                    <button class="btn btn-danger" (click)="logout()" type="button">Exit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+<div style="height: 66px;"></div>

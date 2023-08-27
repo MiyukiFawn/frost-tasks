@@ -1,0 +1,92 @@
+<div class="container" style="margin-top: 8%;">
+    <div class="d-flex flex-column justify-content-center align-items-center">
+        <div class="card shadow">
+            <form [formGroup]="signUpForm" (submit)="signUp()" class="card-body">
+                <h1 class="text-center my-4 font-weight-bold">Sign up</h1>
+                <div class="input-group">
+                    <span class="input-group-text">
+                        <fa-icon [icon]="faEnvelope"></fa-icon>
+                    </span>
+                    <input type="text" placeholder="Email" name="mail" id="mail" class="form-control"
+                        formControlName="email"
+                        [ngClass]="{'is-invalid' : signUpForm.controls.email.invalid && signUpForm.controls.email.touched}">
+                </div>
+                <div class="container d-flex justify-content-center align-items-center invalid-feedback"
+                    *ngIf="signUpForm.controls.email.errors?.['required'] && signUpForm.controls.email.touched">
+                    The email field is required
+                </div>
+                <div class="container d-flex justify-content-center align-items-center invalid-feedback"
+                    *ngIf="signUpForm.controls.email.errors?.['email'] && signUpForm.controls.email.touched">
+                    Prease provide a valid email address
+                </div>
+
+                <div class="input-group mt-3">
+                    <span class="input-group-text">
+                        <fa-icon [icon]="faUser"></fa-icon>
+                    </span>
+                    <input type="text" placeholder="Username" name="username" id="username" formControlName="username"
+                        class="form-control"
+                        [ngClass]="{'is-invalid' : signUpForm.controls.username.invalid && signUpForm.controls.username.touched}">
+                </div>
+                <div class="container d-flex justify-content-center align-items-center invalid-feedback"
+                    *ngIf="signUpForm.controls.username.errors?.['required'] && signUpForm.controls.username.touched">
+                    The username field is required
+                </div>
+                <div class="container d-flex justify-content-center align-items-center invalid-feedback"
+                    *ngIf="signUpForm.controls.username.errors?.['minlength'] && signUpForm.controls.username.touched">
+                    The username must contains at least five characters
+                </div>
+
+                <div class="input-group mt-3">
+                    <span class="input-group-text">
+                        <fa-icon [icon]="faLock"></fa-icon>
+                    </span>
+                    <input type="password" placeholder="Password" name="password" id="password"
+                        [ngClass]="{'is-invalid' : signUpForm.controls.password.invalid && signUpForm.controls.password.touched}"
+                        formControlName="password" class="form-control">
+                </div>
+                <div class="container d-flex justify-content-center align-items-center invalid-feedback"
+                    *ngIf="signUpForm.controls.password.errors?.['required'] && signUpForm.controls.password.touched">
+                    The password field is required
+                </div>
+                <div class="container d-flex justify-content-center align-items-center invalid-feedback"
+                    *ngIf="signUpForm.controls.password.errors?.['minlength'] && signUpForm.controls.password.touched">
+                    The password must contains at least five characters
+                </div>
+
+                <div class="input-group mt-3">
+                    <span class="input-group-text">
+                        <fa-icon [icon]="faLock"></fa-icon>
+                    </span>
+                    <input type="password" placeholder="Confirm password" name="confirm-password" id="confirm-password"
+                        [ngClass]="{'is-invalid' : signUpForm.controls.confirm_password.invalid && signUpForm.controls.confirm_password.touched}"
+                        formControlName="confirm_password" class="form-control">
+                </div>
+                <div *ngIf="signUpForm.errors?.['passwordDontMatch']"
+                    class="container d-flex justify-content-center align-items-center invalid-feedback">
+                    The passwords must match
+                </div>
+
+                <div class="mt-3 container d-flex justify-content-center align-items-center">
+                    <re-captcha id="recaptcha" name="recaptcha" formControlName="token"
+                        [ngClass]="{'is-invalid' : signUpForm.controls.token.errors?.['invalid'] || signUpForm.controls.token.dirty|| signUpForm.controls.token.touched}"></re-captcha>
+                </div>
+                <div class="container d-flex justify-content-center align-items-center invalid-feedback"
+                    *ngIf="signUpForm.controls.token.errors?.['required'] && signUpForm.controls.token.touched">
+                    reCaptcha is mandatory
+                </div>
+                <div class="container d-flex justify-content-center align-items-center invalid-feedback"
+                    *ngIf="error.length > 0">
+                    {{error}}</div>
+
+                <!-- submit -->
+                <div class="d-grid my-3">
+                    <button type="submit" class="btn btn-primary" [disabled]="!canSubmit">Sign up</button>
+                </div>
+                <div class="container d-flex justify-content-center align-items-center">
+                    <a routerLink="/login">I already have an account</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
