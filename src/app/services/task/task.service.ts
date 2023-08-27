@@ -22,11 +22,7 @@ export class TaskService {
         observer.next(this.getTasksFromMem().reverse());
       });
 
-    return this.http.get<Task[]>(environment.apiUrl + '/tasks', {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem('login-token')}`,
-      },
-    });
+    return this.http.get<Task[]>(environment.apiUrl + '/tasks');
   }
 
   createTask(newTask: NewTask): Observable<Task> {
